@@ -11,7 +11,8 @@
       "utils/*": ["./src/utils/*"],
       "context/*": ["./src/context/*"],
       "types/*": ["./src/types/*"],
-      "routes/*": ["./src/routes/*"]
+      "routes/*": ["./src/routes/*"],
+      "tailwind.config": ["./tailwind.config"]
     }
   }
 }

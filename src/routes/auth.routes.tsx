@@ -9,15 +9,13 @@ const Stack = createNativeStackNavigator();
 
 export const AuthRoutes = () => {
   const { colorScheme } = useColorScheme();
+
   return (
     <>
-      <StatusBar
-        backgroundColor="transparent"
-        style={colorScheme === "light" ? "dark" : "light"}
-      />
       <Stack.Navigator
         screenOptions={{
           //headerShown: false,
+          //animation: "none",
           contentStyle: {
             backgroundColor:
               colorScheme === "light"
@@ -43,6 +41,10 @@ export const AuthRoutes = () => {
         <Stack.Screen name="Recover" component={Recover} />
         <Stack.Screen name="SignUp" component={SignUp} />
       </Stack.Navigator>
+      <StatusBar
+        backgroundColor="transparent"
+        style={colorScheme === "light" ? "dark" : "light"}
+      />
     </>
   );
 };

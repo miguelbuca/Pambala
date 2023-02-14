@@ -3,7 +3,9 @@ import {
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { browserSessionPersistence, setPersistence } from "firebase/auth";
+import firebase from "firebase/compat/app";
+import { useState } from "react";
 import { Alert } from "react-native";
 
 export const useOtpState = () => {
@@ -15,7 +17,28 @@ export const useOtpState = () => {
 
   const sendOTP = () => {
     if (otp) {
-      navigation.dispatch(StackActions.replace("Main"));
+      const credential = firebase.auth.PhoneAuthProvider.credential(
+        params.verificationId,
+        otp
+      );
+
+      firebase
+        .auth()
+        .signInWithCredential(credential)
+        .then((session) => {
+          const additionalUserInfo = session.additionalUserInfo;
+
+          if (additionalUserInfo?.isNewUser) {
+            navigation.dispatch(
+              StackActions.replace("Auth", {
+                screen: "CompleteProfile",
+              })
+            );
+          } else {
+            navigation.dispatch(StackActions.replace("Main"));
+          }
+        })
+        .catch((error) => Alert.alert(error.message));
     } else
       Alert.alert(
         "código de segurança",

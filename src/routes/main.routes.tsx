@@ -4,9 +4,9 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import React from "react";
-import { AuthProvider } from "context/auth";
+import { AuthProvider, useAuth } from "context/auth";
 import { HomeRoutes } from "./home.routes";
-import { Account, History, Sells } from "screens/main";
+import { Account, CompleteProfile, History, Sells } from "screens/main";
 import { View, Image, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { HelperRoutesProvider } from "context/helperRoutes";
@@ -14,6 +14,8 @@ import { HelperRoutesProvider } from "context/helperRoutes";
 const Drawer = createDrawerNavigator();
 
 export const MainRoutes = () => {
+  const { user } = useAuth();
+
   return (
     <AuthProvider>
       <HelperRoutesProvider>
@@ -26,16 +28,21 @@ export const MainRoutes = () => {
                     <View className="border-2 border-white rounded-full">
                       <Image
                         className="rounded-full h-[60px] w-[60px]"
-                        source={require("assets/avatar.png")}
+                        source={
+                          user
+                            ? { uri: user.photoURL }
+                            : require("assets/avatar.png")
+                        }
+                        resizeMode="stretch"
                       />
                     </View>
 
                     <View className="mt-1">
                       <Text className="font-bold text-white text-[16px]">
-                        Miguel Buca
+                        {user?.displayName}
                       </Text>
                       <Text className="text-[#ccc] text-center text-[13px]">
-                        @miguelbuca
+                        {user?.email}
                       </Text>
                     </View>
                   </View>
@@ -67,6 +74,14 @@ export const MainRoutes = () => {
           <Drawer.Screen name="Account" component={Account} />
           <Drawer.Screen name="History" component={History} />
           <Drawer.Screen name="Sells" component={Sells} />
+          <Drawer.Screen
+            options={{
+              title: "Subscrição",
+              headerShown: false,
+            }}
+            name="CompleteProfile"
+            component={CompleteProfile}
+          />
         </Drawer.Navigator>
       </HelperRoutesProvider>
     </AuthProvider>

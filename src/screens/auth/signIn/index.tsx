@@ -1,13 +1,19 @@
 import { Button } from "components/button";
 import { PhoneInput } from "components/phoneInput";
+import * as Constants from "expo-constants";
+import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import { useSignInState } from "./state";
 
 export const SignIn = () => {
-  const { next, phoneInputHandler } = useSignInState();
+  const { next, recaptchaVerifier, phoneInputHandler } = useSignInState();
   return (
     <View className="flex flex-1 p-4">
+      <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifier}
+        firebaseConfig={Constants.default.expoConfig?.extra?.firebaseConfig}
+      />
       <ScrollView className="flex-1">
         <View className="h-[100px] justify-center">
           <Text className="font-bold text-[18px]">

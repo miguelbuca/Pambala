@@ -1,7 +1,7 @@
 import { View, Image } from "react-native";
 import React, { FC, useRef } from "react";
 import RNPhoneInput from "react-native-phone-input";
-import ChevronDwon from "assets/svg/chevron-dwon.svg";
+import { Feather } from "@expo/vector-icons";
 
 export const PhoneInput: FC<{
   onChange?: (displayValue: string, iso2: string) => void;
@@ -22,7 +22,7 @@ export const PhoneInput: FC<{
             <View className="flex flex-row items-center p-[8px] border-r-[1.5px] border-r-[#f5f5f5]">
               <Image source={imageSource} className="w-[30px] h-[20px]" />
               <View className="ml-2">
-                <ChevronDwon />
+                <Feather name="chevron-down" />
               </View>
             </View>
           );

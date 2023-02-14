@@ -11,12 +11,20 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "extra": {
+      "firebaseConfig": {
+        "apiKey": "AIzaSyDqR-GKDmFZNY58mmqOf22B9S9PR5ElNTk",
+        "authDomain": "app-pambala.firebaseapp.com",
+        "projectId": "app-pambala",
+        "storageBucket": "app-pambala.appspot.com",
+        "messagingSenderId": "40598195479",
+        "appId": "1:40598195479:web:0c7029871da44cf3667b52"
+      }
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -28,6 +36,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ]
   }
 }

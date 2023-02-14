@@ -4,15 +4,12 @@ import { theme } from "../../tailwind.config";
 import { useColorScheme } from "nativewind";
 import { StatusBar } from "expo-status-bar";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { TabRoutes } from "./tab.routes";
+import { Create, Show } from "screens/main/publish";
 import { useHelperRoutes } from "context/helperRoutes";
-import { TouchableOpacity } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { PublicationRoutes } from "./publication.routes";
 
 const Stack = createNativeStackNavigator();
 
-export const HomeRoutes = () => {
+export const PublicationRoutes = () => {
   const { colorScheme } = useColorScheme();
   const { old: oldRouteName } = useHelperRoutes();
 
@@ -38,33 +35,15 @@ export const HomeRoutes = () => {
           options={{
             headerShown: false,
           }}
-          name="TabRoutes"
-          component={TabRoutes}
+          name="Create"
+          component={Create}
         />
         <Stack.Screen
           options={{
-            headerTitle: "Mensagens",
-            headerBackTitle: oldRouteName,
-            headerRight: () => (
-              <TouchableOpacity>
-                <Feather
-                  name="phone"
-                  color={theme.extend.colors.primary[1]}
-                  size={20}
-                />
-              </TouchableOpacity>
-            ),
+            headerShown: false,
           }}
-          name="Message"
-          component={Message}
-        />
-        <Stack.Screen
-          options={{
-            headerTitle: "Publicar",
-            headerBackTitle: oldRouteName,
-          }}
-          name="PublicationRoutes"
-          component={PublicationRoutes}
+          name="Show"
+          component={Show}
         />
       </Stack.Navigator>
     </>

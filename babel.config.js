@@ -17,6 +17,7 @@ module.exports = function (api) {
             utils: "./src/utils",
             types: "./src/types",
             routes: "./src/routes",
+            "tailwind.config": "./tailwind.config",
           },
         },
       ],

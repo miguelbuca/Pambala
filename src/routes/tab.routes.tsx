@@ -43,6 +43,7 @@ export const TabRoutes = () => {
               fontFamily: "GreatVibesRegular",
               fontSize: 23,
             },
+
             //headerShown: false,
             //headerTransparent: true,
             headerTitleAlign: "center",

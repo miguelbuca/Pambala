@@ -1,14 +1,14 @@
 import React from "react";
 import { ScrollView, Text, View, Image, Pressable } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
-import { Button, SearchInput, PostCard } from "components/index";
+import { Button, PostCard } from "components/index";
 import { usePostsState } from "./state";
-import { Modalize } from "react-native-modalize";
 import InstaStory from "react-native-insta-story";
 import { theme } from "../../../../../tailwind.config";
 
 export const Posts = () => {
-  const { modalizeRef, onOpen } = usePostsState();
+  const { publication, publishHandler, showPublicationHandler } =
+    usePostsState();
   const data = [
     {
       user_id: 1,
@@ -74,7 +74,7 @@ export const Posts = () => {
             <Text className="text-[16px] font-semibold">Publicações</Text>
           </View>
           <View>
-            <Button>
+            <Button onPress={publishHandler}>
               <Text className="flex items-center justify-center font-bold">
                 Publicar <Feather size={18} name="edit" />
               </Text>
@@ -82,25 +82,37 @@ export const Posts = () => {
           </View>
         </View>
         <View className="p-4 mb-4">
-          <Pressable onPress={onOpen}>
-            <PostCard
-              account={{
-                id: "1",
-                name: "Guivalda",
-                username: "@guiv",
-              }}
-              price={180000}
-              name={"IPHONE X"}
-              description={"Memoria 64GB, versao 16"}
-              like={10}
-              image={require("assets/temp/iphone-2.jpg")}
-              share={1}
-            />
-          </Pressable>
+          {Object.keys(publication).map((key, index) => {
+            const { name, description, amount, assets } = publication[key];
+
+            return (
+              <Pressable
+                key={index}
+                className="mb-4"
+                onPress={() => showPublicationHandler({})}
+              >
+                <PostCard
+                  account={{
+                    name: "Guivalda",
+                    username: "@guiv",
+                  }}
+                  price={amount as number}
+                  name={name as string}
+                  description={description}
+                  like={10}
+                  image={
+                    assets?.length
+                      ? {
+                          uri: assets[0],
+                        }
+                      : undefined
+                  }
+                  share={1}
+                />
+              </Pressable>
+            );
+          })}
         </View>
-        <Modalize ref={modalizeRef} snapPoint={40}>
-          <Text>...your content</Text>
-        </Modalize>
       </ScrollView>
     </>
   );

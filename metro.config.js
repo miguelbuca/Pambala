@@ -3,6 +3,11 @@ const { getDefaultConfig } = require("expo/metro-config");
 module.exports = (() => {
   const config = getDefaultConfig(__dirname);
 
+  /**
+   * firebase
+   */
+  config.resolver.assetExts.push("cjs");
+
   const { transformer, resolver } = config;
 
   config.transformer = {
